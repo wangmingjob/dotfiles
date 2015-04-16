@@ -131,6 +131,8 @@ Plugin 'Auto-Pairs'
 "Plugin 'Pydiction'
 "Plugin 'Color-Scheme-Explorer'
 "Plugin 'Jinja'
+"my configuration
+Plugin 'tomasr/molokai'
 
 " non github repos
 
@@ -254,15 +256,13 @@ set t_Co=256
 
 try
     set background=dark
-    colorscheme Tomorrow-Night-Bright
-    "colorscheme desert
-    "highlight Nornal ctermbg=NONE
-    "highlight NonText ctermbg=NONE
+    colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme desert
 endtry
 
-" Highlight TODO/FIXME/XXX
+let g:molokai_original = 1
+
 highlight myTODO cterm=bold term=bold ctermbg=yellow ctermfg=black
 match myTODO /\(TODO\|XXX\|FIXME\)/
 

@@ -75,3 +75,5 @@ POST_CUSTOM="${WORK_DIR}/custom/post_custom.zsh"
 if [ -e "${POST_CUSTOM}" ]; then
     source ${POST_CUSTOM}
 fi
+
+alias vimgo='vim -u ~/.vimrc.go'
