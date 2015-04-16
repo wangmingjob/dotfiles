@@ -59,7 +59,7 @@ install_vundle(){
 		echo "Change directory back to `pwd`"
 	else
 		echo "${VUNDLE} not exists. Git clone to create..."
-		git clone https://github.com/gmarik/vundle.git ${HOME}/.vim/bundle/vundle
+		git clone https://github.com/gmarik/vundle.git ${HOME}/.vim/bundle/Vundle.vim
 		vim +BundleInstall +qall
 	fi
 }
