@@ -76,4 +76,7 @@ if [ -e "${POST_CUSTOM}" ]; then
     source ${POST_CUSTOM}
 fi
 
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 alias vimgo='vim -u ~/.vimrc.go'
