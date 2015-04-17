@@ -18,12 +18,13 @@ if ! $(tmux has-session -t ${SESSION_NAME}); then
 	tmux split-window -h -p 60
 	tmux select-pane -t 0
 	tmux split-window -v -p 25
-	tmux send-keys -t 0 'ipython' C-m
+	#tmux send-keys -t 0 'ipython' C-m
 	# The C-m at the end is interpreted by Tmux as the enter key.
 
 	tmux new-window -n ${WINDOWS_NAME2}
 
 	tmux select-window -t ${WINDOWS_NAME1}
+	tmux send-keys -t 2 'vimgo ~/go/src' C-m
 	tmux select-pane -t 2
 fi
 
