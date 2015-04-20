@@ -24,7 +24,7 @@ if ! $(tmux has-session -t ${SESSION_NAME}); then
 	tmux new-window -n ${WINDOWS_NAME2}
 
 	tmux select-window -t ${WINDOWS_NAME1}
-	tmux send-keys -t 2 'vimgo ~/go/src' C-m
+    tmux send-keys -t 2 'vim ~/go/src' C-m
 	tmux select-pane -t 2
 fi
 
