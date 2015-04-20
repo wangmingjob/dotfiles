@@ -1,51 +1,169 @@
-" Tanky Woo <me@tankywoo.com>
-" https://tankywoo.com
+"https://github.com/yangyangwithgnu/use_vim_as_ide
 
-"========="
-" General "
-"========="
-set nu " Set the line number
-syntax on " Syntax highlighting
-"set autochdir " Set the current dir as thr work dir
-set hlsearch " Highlight the search result
-set incsearch " Real-time search
-" Disabled by `vundle`
-"filetype on " File type detection
-"filetype plugin on " Loading the plugin files for specific file types
-"filetype indent on " Loading the indent file for specific file types with
-set foldmethod=indent " The kind of folding used for the current window 
+"==========================================================================="
+"                                     General                               "
+"==========================================================================="
+"======基础配置======"
+syntax enable " 开启语法高亮功能
+syntax on   " 用指定语法高亮配色方案替换默认方案
+filetype on   " 开启文件类型侦测
+filetype plugin on   " 不同文件加载对应的插件
+set nocompatible " 关闭兼容模式
+set nu   " 显示行号
+set ruler " 显示光标当前位置
+set incsearch  " 开启实时搜索功能
+set ignorecase  " 搜索时大小写不敏感
+set wildmenu  " 命令行模式智能补全
+
+"======代码缩进======"
+filetype indent on " 自适应不同语言的智能缩进
+set expandtab " 将制表符扩展为空格
+set tabstop=4 " 设置编辑时制表符占用空格数
+set shiftwidth=4 " 设置格式化时制表符占用空格数
+set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
+
+"=======代码折叠======"
+set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
+set nofoldenable " 启动 vim 时关闭折叠代码
 set foldlevel=99
-set nocompatible " Use the vim's keyboard setting, not vi
 set cindent
-set tabstop=4
-set shiftwidth=4
 set smarttab
 set autoindent " Copy indent from current line when starting a new line
-set softtabstop=4
-set smartindent shiftwidth=4
-"set expandtab " Use the space to instead of tab
-set smartindent
 set showmatch " When a bracket is inserted, briefly jump to the matching one
 set showmode " Show the mode
 set nobackup " No backup
-set cursorline " Highlighter the current line
-"hi cursorline gui=UNDERLINE cterm=UNDERLINE
+set cursorline " 高亮当前行
 set fileencodings=utf-8,gb18030,cp936,big5 " Set the encode
 set t_Co=256 " If under tty, use 256
 set pastetoggle=<F10> "" Bind `F10` to `:set paste`
 set backspace=2 " same as ":set backspace=indent,eol,start" in vim7.4
+set nowrap  "禁止折行
 
-" Display `tab` and `trail space`
-set list
-set listchars=tab:>-,trail:.
+"=============================================================================="
+"                                         Plugin                               "
+"=============================================================================="
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" NOTE: vim <leader> default is `\`, can `:help <leader>` to see more.
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Not display above list
-nmap <leader>l :set list!<CR>
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'chriskempson/tomorrow-theme'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'godlygeek/tabular'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mitsuhiko/vim-jinja'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
+Plugin 'Tagbar'
+Plugin 'Auto-Pairs'
+Plugin 'tomasr/molokai'
 
-" Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+"==========主题配置==========="
+set t_Co=256
+set background=dark
+colorscheme molokai
+let g:molokai_original = 1
+
+"=============================================================================="
+"                                        Keymap                                "
+"=============================================================================="
+let mapleader=","   " 定义快捷键的前缀，即<Leader>
+
+nmap lb 0
+nmap le $
+
+vnoremap <Leader>y   "copy
+nmap <Leader>p       "past
+
+nmap <Leader>q :q<CR>  " 定义快捷键关闭当前分割窗口
+nmap <Leader>Q :qa!<CR>  " 不做任何保存，直接退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR> " 定义快捷键保存所有窗口内容并退出 vim
+
+nnoremap nw <C-W><C-W>  " 依次遍历子窗口
+
+
+nnoremap <Leader>lw <C-W>l  " 跳转至右方的窗口
+nnoremap <Leader>hw <C-W>h  " 跳转至左方的窗口
+nnoremap <Leader>kw <C-W>k  " 跳转至上方的子窗口
+nnoremap <Leader>jw <C-W>j  " 跳转至下方的子窗口
+
+nmap <leader>l :set list!<CR> " Not display above list
+nmap <Leader>pa %  " 定义快捷键在结对符之间跳转，助记pair
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR> " Execute file being edited with <Shift> + e:
+
+"=============================================================================="
+"                                        Plugin configuration                  "
+"=============================================================================="
+"=========Tagbar==========="
+map <leader>t :TagbarToggle<CR> 
+
+"==========NERDTree========"
+nmap <leader>e :NERDTreeToggle<CR> 
+
+"==============vim-powerline==========="
+let g:Powerline_symbols = 'unicode' " compatible/unicode/fancy
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors"
+au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2
+
+"===========Better Rainbow Parentheses======="
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+"==========davidhalter/jedi-vim======"
+autocmd FileType python setlocal completeopt-=preview    " disable docstring
+let g:jedi#completions_command = "<C-N>"
+
+"=======vim-flake8======="
+autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+let g:flake8_quickfix_height=5
+let g:flake8_show_in_gutter=1
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
+
+"==========SirVer/ultisnips========"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"============rainbow_parentheses.vim============"
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
 
 " cc is only exist >= `Vim7.3`
 if exists('+colorcolumn')
@@ -78,198 +196,4 @@ endf
 autocmd bufnewfile *.sh call HeaderBash()
 
 autocmd FileType html set shiftwidth=2|set expandtab
-
-"======================"
-" Vundle Configuration "
-"======================"
-set nocompatible               " be iMproved, required
-filetype off                   " required!
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required! 
-Plugin 'gmarik/Vundle.vim'
-
-" My Vundles here:
-
-" original repos on github
-" newer powerline is https://github.com/powerline/powerline
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'chriskempson/tomorrow-theme'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdtree'
-Plugin 'mitsuhiko/vim-jinja'
-Plugin 'airblade/vim-gitgutter'
-"Plugin 'ervandew/supertab'
-" neocomplete need vim --with-lua
-"Plugin 'Shougo/neocomplete.vim'
-"Plugin 'kevinw/pyflakes-vim'
-" doc: https://github.com/vim-scripts/pydoc.vim
-"Plugin 'fs111/pydoc.vim'
-Plugin 'SirVer/ultisnips'
-" with ultisnips, Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-Plugin 'mattn/emmet-vim'
-
-" vim-scripts repos
-" Tagbar is more powerful than 'taglist.vim'
-Plugin 'Tagbar'
-" `Auto-Pairs` is more useful than `AutoClose`
-" TODO need to research
-Plugin 'Auto-Pairs'
-"Plugin 'pep8'
-"Plugin 'TaskList.vim'
-" `snipMate` will conflict with `PyDiction`, Google
-"Plugin 'snipMate'
-"Plugin 'Pydiction'
-"Plugin 'Color-Scheme-Explorer'
-"Plugin 'Jinja'
-"my configuration
-Plugin 'tomasr/molokai'
-
-" non github repos
-
-call vundle#end()             " required!
-filetype plugin indent on     " required!
-" To ignore plugin indent changes, instead use:
-"filetype plugin on"
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"=============================="
-" Vundle Plugins Configuration "
-"=============================="
-" Tagbar
-map <leader>tb :TagbarToggle<CR>
-"map <leader>tbc :TagbarClose<CR>
-nmap <F8> :TagbarToggle<CR>
-
-" NERDTree
-nmap <leader>ne :NERDTreeToggle<CR>
-
-" vim-powerline
-let g:Powerline_symbols = 'unicode' " compatible/unicode/fancy
-set laststatus=2   " Always show the statusline
-set encoding=utf-8 " Necessary to show Unicode glyphs
-set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors"
-au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2
-
-" Better Rainbow Parentheses
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
-
-" davidhalter/jedi-vim
-autocmd FileType python setlocal completeopt-=preview    " disable docstring
-let g:jedi#completions_command = "<C-N>"
-
-" tabular
-" use `Tab /|` to auto align '|'
-
-" vim-flake8
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-let g:flake8_quickfix_height=5
-let g:flake8_show_in_gutter=1
-highlight link Flake8_Error      Error
-highlight link Flake8_Warning    WarningMsg
-highlight link Flake8_Complexity WarningMsg
-highlight link Flake8_Naming     WarningMsg
-highlight link Flake8_PyFlake    WarningMsg
-"autocmd BufWritePost *.py call Flake8()
-
-" rainbow_parentheses.vim
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-
-" vim-gitgutter
-" https://github.com/airblade/vim-gitgutter
-let g:gitgutter_max_signs = 100
-"let g:gitgutter_highlight_lines = 1
-
-" SirVer/ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" TagList
-" In Mac, use brew install ctags and specified the command path
-"let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
-"map <F7> :Tlist<CR>
-
-" TaskList
-"map <leader>tl :TaskList<CR>
-
-" PyDiction
-"let g:pydiction_location = '/home/tankywoo/.vim/bundle/Pydiction/complete-dict' " TODO
-"let g:pydiction_menu_height = 10
-
-" neocomplcache
-"let g:neocomplcache_enable_at_startup = 1
-
-"set completeopt=longest,menu,preview
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" Flake8
-"autocmd BufWritePost *.py call Flake8()
-"let g:flake8_builtins="_,apply"
-
-" pep8
-"let g:pep8_map='<C-k>'
-
-
-"================"
-" Color Settings "
-" ==============="
-set t_Co=256
-
-try
-    set background=dark
-    colorscheme molokai
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme desert
-endtry
-
-let g:molokai_original = 1
-
-highlight myTODO cterm=bold term=bold ctermbg=yellow ctermfg=black
-match myTODO /\(TODO\|XXX\|FIXME\)/
-
-" vim-gitgutter
-highlight clear SignColumn
-"highlight GitGutterAdd ctermfg=green guifg=darkgreen
-"highlight GitGutterChange ctermfg=yellow guifg=darkyellow
-"highlight GitGutterDelete ctermfg=red guifg=darkred
-"highlight GitGutterChangeDelete ctermfg=yellow guifg=darkyellow
-"highlight GitGutterAddLine ctermbg=darkgreen guifg=darkgreen
+"=============================================================="
