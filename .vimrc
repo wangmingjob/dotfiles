@@ -3,6 +3,7 @@
 "==========================================================================="
 "                                     General                               "
 "==========================================================================="
+
 "======基础配置======"
 syntax enable " 开启语法高亮功能
 syntax on   " 用指定语法高亮配色方案替换默认方案
@@ -17,18 +18,12 @@ set smartcase
 set wildmenu  " 命令行模式智能补全
 set wildmode=list:longest,full
 set completeopt=longest,menuone
-let $LANG="en"
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
+set nobackup " 覆盖文件时不备份
+set noswapfile
+set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
 if has('mouse')
   set mouse=a
 endif
-set showcmd
-set nobackup " 覆盖文件时不备份
-set nowb
-set noswapfile
-set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
 
 "======代码缩进======"
 filetype indent on " 自适应不同语言的智能缩进
@@ -40,8 +35,6 @@ set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
 "=======代码折叠======"
 set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
 set nofoldenable " 启动 vim 时关闭折叠代码
-set foldlevel=100 " 启动vim时不要自动折叠代码
-set foldcolumn=5 " 设置折叠栏宽度
 set smarttab " 只能添加4个空格和删除4个空格
 set autoindent " 自动缩进
 set showmatch " 设置匹配模式，类似当输入一个左括号时会匹配相应的右括号   
@@ -56,6 +49,7 @@ set nowrap  "禁止折行
 let mapleader=","   " 定义快捷键的前缀，即<Leader>
 let g:mapleader = ","
 inoremap jj <esc>
+
 "=============================================================================="
 "                                         Plugin                               "
 "=============================================================================="
@@ -324,6 +318,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
+highlight clear SignColumn
 
 " Auto add head info
 " .py file auto add header
