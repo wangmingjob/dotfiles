@@ -8,12 +8,27 @@ syntax enable " 开启语法高亮功能
 syntax on   " 用指定语法高亮配色方案替换默认方案
 filetype on   " 开启文件类型侦测
 filetype plugin on   " 不同文件加载对应的插件
-set nocompatible " 关闭兼容模式
+set nocompatible " 关闭兼容∏模式
 set nu   " 显示行号
 set ruler " 显示光标当前位置
 set incsearch  " 开启实时搜索功能
 set ignorecase  " 搜索时大小写不敏感
+set smartcase
 set wildmenu  " 命令行模式智能补全
+set wildmode=list:longest,full
+set completeopt=longest,menuone
+let $LANG="en"
+set langmenu=en
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+if has('mouse')
+  set mouse=a
+endif
+set showcmd
+set nobackup " 覆盖文件时不备份
+set nowb
+set noswapfile
+set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
 
 "======代码缩进======"
 filetype indent on " 自适应不同语言的智能缩进
@@ -25,20 +40,22 @@ set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
 "=======代码折叠======"
 set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
 set nofoldenable " 启动 vim 时关闭折叠代码
-set foldlevel=99
-set cindent
-set smarttab
-set autoindent " Copy indent from current line when starting a new line
-set showmatch " When a bracket is inserted, briefly jump to the matching one
-set showmode " Show the mode
-set nobackup " No backup
+set foldlevel=100 " 启动vim时不要自动折叠代码
+set foldcolumn=5 " 设置折叠栏宽度
+set smarttab " 只能添加4个空格和删除4个空格
+set autoindent " 自动缩进
+set showmatch " 设置匹配模式，类似当输入一个左括号时会匹配相应的右括号   
+set showmode " 显示模式
 set cursorline " 高亮当前行
-set fileencodings=utf-8,gb18030,cp936,big5 " Set the encode
-set t_Co=256 " If under tty, use 256
+set fileencodings=utf-8,gb18030,cp936,big5 " 显示文件编码格式
+set t_Co=256 " 使用256配色
 set pastetoggle=<F10> "" Bind `F10` to `:set paste`
 set backspace=2 " same as ":set backspace=indent,eol,start" in vim7.4
 set nowrap  "禁止折行
 
+let mapleader=","   " 定义快捷键的前缀，即<Leader>
+let g:mapleader = ","
+inoremap jj <esc>
 "=============================================================================="
 "                                         Plugin                               "
 "=============================================================================="
@@ -50,19 +67,32 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'chriskempson/tomorrow-theme'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'scrooloose/nerdtree'
-Plugin 'mitsuhiko/vim-jinja'
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
 Plugin 'Tagbar'
 Plugin 'Auto-Pairs'
 Plugin 'tomasr/molokai'
+Plugin 'mileszs/ack.vim'
+Plugin 'ctrlp.vim'
+Plugin 'EasyMotion'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'CSApprox'
+Plugin 'gitv'
+Plugin 'neocomplcache-snippets_complete'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'The-NERD-Commenter'
+Plugin 'The-NERD-tree'
+Plugin 'Syntastic'
+Plugin 'fatih/vim-go'
+Plugin 'airblade/vim-gitgutter'
+Plugin  'fugitive.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,8 +108,6 @@ let g:molokai_original = 1
 "=============================================================================="
 "                                        Keymap                                "
 "=============================================================================="
-let mapleader=","   " 定义快捷键的前缀，即<Leader>
-
 nmap lb 0
 nmap le $
 
@@ -93,10 +121,26 @@ nmap <Leader>WQ :wa<CR>:q<CR> " 定义快捷键保存所有窗口内容并退出
 nnoremap nw <C-W><C-W>  " 依次遍历子窗口
 
 
-nnoremap <Leader>lw <C-W>l  " 跳转至右方的窗口
-nnoremap <Leader>hw <C-W>h  " 跳转至左方的窗口
-nnoremap <Leader>kw <C-W>k  " 跳转至上方的子窗口
-nnoremap <Leader>jw <C-W>j  " 跳转至下方的子窗口
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>tj :tabnext
+map <leader>tk :tabprevious
+
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z,
 
 nmap <leader>l :set list!<CR> " Not display above list
 nmap <Leader>pa %  " 定义快捷键在结对符之间跳转，助记pair
@@ -138,12 +182,6 @@ highlight link Flake8_Complexity WarningMsg
 highlight link Flake8_Naming     WarningMsg
 highlight link Flake8_PyFlake    WarningMsg
 
-"==========SirVer/ultisnips========"
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 "============rainbow_parentheses.vim============"
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
@@ -165,13 +203,127 @@ let g:rbpt_colorpairs = [
     \ ]
 
 
-" cc is only exist >= `Vim7.3`
-if exists('+colorcolumn')
-    set cc=81 " Short for colorcolumn
-else
-    au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"------------------------------------------------------------------------------
+" BufExplorer
+"------------------------------------------------------------------------------
+
+" Shortcuts, type <leader>l to quickly navigate to necessary buffer
+map <leader>l :BufExplorer<cr>
+imap <leader>l <esc>:BufExplorer<cr>
+vmap <leader>l <esc>:BufExplorer<cr>
+
+
+"------------------------------------------------------------------------------
+" Fugitive
+"------------------------------------------------------------------------------
+map ]] ]c
+map [[ [c
+map <leader>gdi :Gdiff<cr>
+map <leader>gst :Gstatus<cr>
+map <leader>dup :diffupdate<cr>
+
+"------------------------------------------------------------------------------
+" Syntastic
+"------------------------------------------------------------------------------
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"------------------------------------------------------------------------------
+" NeoComplete
+"------------------------------------------------------------------------------
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Close popup by <Space>.
+" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
-hi ColorColumn ctermbg=lightgrey guibg=lightgreya  " Highlighter cc
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+
+"------------------------------------------------------------------------------
+" Vim-go
+"------------------------------------------------------------------------------
+let g:go_fmt_fail_silently = 1
+
+" Show a list of interfaces which is implemented by the type under your cursor
+au FileType go nmap <Leader>s <Plug>(go-implements)
+
+" Show type info for the word under your cursor
+au FileType go nmap <Leader>i <Plug>(go-info)
+
+" Open the relevant Godoc for the word under the cursor
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+" Open the Godoc in browser
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+" Run/build/test/coverage
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+" By default syntax-highlighting for Functions, Methods and Structs is disabled.
+" Let's enable them!
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+
 
 " Auto add head info
 " .py file auto add header
