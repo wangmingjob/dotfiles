@@ -86,7 +86,8 @@ Plugin 'The-NERD-tree'
 Plugin 'Syntastic'
 Plugin 'fatih/vim-go'
 Plugin 'airblade/vim-gitgutter'
-Plugin  'fugitive.vim'
+Plugin 'fugitive.vim'
+Plugin 'editorconfig-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
