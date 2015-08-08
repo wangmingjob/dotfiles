@@ -1,12 +1,8 @@
 [user]
     name = wangmingjob
     email = wangmingjobo@gmail.com
-[push]
-	; for git 1.8
-	default = simple
 [core]
 	editor = vim
-    excludesfile = /home/wangmingjob/.gitignore
 	quotepath = false
 [diff]
 	tool = vimdiff
