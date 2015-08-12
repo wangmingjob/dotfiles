@@ -1,1 +1,1 @@
-/root/git/dotfiles/.zsh
+/data/data/git/dotfiles/.zsh

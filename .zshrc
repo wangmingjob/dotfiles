@@ -77,5 +77,5 @@ if [ -e "${POST_CUSTOM}" ]; then
 fi
 
 export GOROOT="/usr/local/go"
-export GOPATH="$HOME/go"
+export GOPATH="/data/data/go"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
