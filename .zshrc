@@ -1,7 +1,7 @@
 # Use the default config, them overwrite it.
 . ~/.oh-my-zsh/templates/zshrc.zsh-template
 
-ZSH_THEME="tanky"
+ZSH_THEME="maran"
 DISABLE_CORRECTION="true"
 DISABLE_AUTO_TITLE="true"
 DISABLE_AUTO_UPDATE="true"
@@ -77,5 +77,5 @@ if [ -e "${POST_CUSTOM}" ]; then
 fi
 
 export GOROOT="/usr/local/go"
-export GOPATH="/data/data/go"
+export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
