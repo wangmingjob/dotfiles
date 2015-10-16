@@ -76,6 +76,9 @@ if [ -e "${POST_CUSTOM}" ]; then
     source ${POST_CUSTOM}
 fi
 
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
+
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
