@@ -76,6 +76,7 @@ if [ -e "${POST_CUSTOM}" ]; then
     source ${POST_CUSTOM}
 fi
 
+<<<<<<< HEAD
 LC_CTYPE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
 
@@ -85,3 +86,11 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
 export JAVA_HOME=/usr/java/jdk1.8.0_51
 export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
 export PATH=/root/.node/bin:/usr/local/apache/bin:$JAVA_HOME/bin:/usr/local/nginx/sbin:/usr/local/php/bin:/usr/local/mysql/bin:$PATH
+=======
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/go"
+
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
+>>>>>>> 4b79168e909c1ef832f97d4d0afe5db68c26369e
