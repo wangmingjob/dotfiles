@@ -1,7 +1,7 @@
 # Use the default config, them overwrite it.
 . ~/.oh-my-zsh/templates/zshrc.zsh-template
 
-ZSH_THEME="tanky"
+ZSH_THEME="maran"
 DISABLE_CORRECTION="true"
 DISABLE_AUTO_TITLE="true"
 DISABLE_AUTO_UPDATE="true"
@@ -76,6 +76,12 @@ if [ -e "${POST_CUSTOM}" ]; then
     source ${POST_CUSTOM}
 fi
 
+LC_CTYPE=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+
 export GOROOT="/usr/local/go"
-export GOPATH="/data/data/go"
+export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
+export JAVA_HOME=/usr/java/jdk1.8.0_51
+export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
+export PATH=/root/.node/bin:/usr/local/apache/bin:$JAVA_HOME/bin:/usr/local/nginx/sbin:/usr/local/php/bin:/usr/local/mysql/bin:$PATH
