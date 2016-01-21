@@ -15,7 +15,7 @@ Before Install, make sure you have installed zsh.
 
 Install:
 
-	./setup.sh
+	./install.sh
 
 Uninstall:
 
