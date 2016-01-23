@@ -83,7 +83,7 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
 
-export JAVA_HOME=/usr/java/jdk1.8.0_51
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
 export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
 export PATH=/root/.node/bin:/usr/local/apache/bin:$JAVA_HOME/bin:/usr/local/nginx/sbin:/usr/local/php/bin:/usr/local/mysql/bin:$PATH
 

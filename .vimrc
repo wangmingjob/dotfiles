@@ -60,8 +60,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Lokaltog/vim-powerline'
 Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Lokaltog/vim-powerline'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'godlygeek/tabular'
@@ -78,6 +78,8 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'CSApprox'
 Plugin 'gitv'
 Plugin 'neocomplcache-snippets_complete'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
@@ -88,6 +90,8 @@ Plugin 'fatih/vim-go'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fugitive.vim'
 Plugin 'editorconfig-vim'
+Plugin 'junegunn/fzf'
+Plugin 'bling/vim-bufferline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -150,18 +154,18 @@ map <leader>t :TagbarToggle<CR>
 "==========NERDTree========"
 nmap <leader>e :NERDTreeToggle<CR> 
 
+"===========Better Rainbow Parentheses======="
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
 "==============vim-powerline==========="
 let g:Powerline_symbols = 'unicode' " compatible/unicode/fancy
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors"
 au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2
-
-"===========Better Rainbow Parentheses======="
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 "==========davidhalter/jedi-vim======"
 autocmd FileType python setlocal completeopt-=preview    " disable docstring
@@ -284,9 +288,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 
 "------------------------------------------------------------------------------
