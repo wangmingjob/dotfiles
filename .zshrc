@@ -79,13 +79,32 @@ fi
 LC_CTYPE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
 
+######################################################-----PATH start------###################################################################
+# Linuxbrew
+export BREW_HOME="$HOME/.linuxbrew"
+export MANPATH="$BREW_HOME/share/man"
+export INFOPATH="$BREW_HOME/share/info"
+export PATH="$PATH:$BREW_HOME/bin"
+
+# Java 
+export JAVA_HOME="usr/local/java"
+export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
+export PATH="$PATH:$JAVA_HOME/bin"
+
+# Android
+export ANDROID_HOME="/usr/local/android"
+export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
+
+# Golang
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home
-export CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
-export PATH=/root/.node/bin:/usr/local/apache/bin:$JAVA_HOME/bin:/usr/local/nginx/sbin:/usr/local/php/bin:/usr/local/mysql/bin:$PATH
+# APACHE NGINX PHP MYSQL
+export APACHE_HOME="/usr/local/apache"
+export NGNIX_HOME="/usr/local/nginx"
+export PHP_HOME="/usr/local/php"
+export MYSQL_HOME="/usr/local/mysql"
+export PATH="$PATH:/root/.node/bin:$JAVA_HOME/bin:$APACHE_HOME/bin:$NGNIX_HOME/sbin:$PHP_HOME/bin:$MYSQL_HOME/bin"
 
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
+######################################################-----PATH end------###################################################################

@@ -1,9 +1,10 @@
 [user]
     name = wangmingjob
-    email = wangmingjobo@gmail.com
+    email = wangmingjob@icloud.com
 [core]
 	editor = vim
 	quotepath = false
+	autocrlf = input
 [diff]
 	tool = vimdiff
 [merge]
@@ -44,3 +45,7 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
