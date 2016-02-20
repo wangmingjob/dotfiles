@@ -98,6 +98,7 @@ export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
 # Golang
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
+export GO15VENDOREXPERIMENT=1
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
 
 # APACHE NGINX PHP MYSQL
