@@ -92,6 +92,7 @@ Plugin 'fugitive.vim'
 Plugin 'editorconfig-vim'
 Plugin 'junegunn/fzf'
 Plugin 'bling/vim-bufferline'
+Plugin 'cespare/vim-toml'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
