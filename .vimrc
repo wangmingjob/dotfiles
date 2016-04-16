@@ -93,6 +93,10 @@ Plugin 'editorconfig-vim'
 Plugin 'junegunn/fzf'
 Plugin 'bling/vim-bufferline'
 Plugin 'cespare/vim-toml'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'junegunn/vim-xmark'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -317,6 +321,15 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+
+"------------------------------------------------------------------------------
+" Markdown
+"------------------------------------------------------------------------------
+let g:mkdp_path_to_chrome = "google-chrome"
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_open = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
 
 " By default syntax-highlighting for Functions, Methods and Structs is disabled.
 " Let's enable them!
