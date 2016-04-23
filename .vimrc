@@ -158,6 +158,8 @@ map <leader>t :TagbarToggle<CR>
 
 "==========NERDTree========"
 nmap <leader>e :NERDTreeToggle<CR> 
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 "===========Better Rainbow Parentheses======="
 au VimEnter * RainbowParenthesesToggle
