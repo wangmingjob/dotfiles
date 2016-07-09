@@ -365,8 +365,8 @@ let g:phpcomplete_mappings = {
 "------------------------------------------------------------------------------
 " Tabline
 "------------------------------------------------------------------------------
-hi TabLine      ctermfg=Black  ctermbg=DarkGreen     cterm=NONE
-hi TabLineFill  ctermfg=Black  ctermbg=DarkGreen     cterm=NONE
+hi TabLine      ctermfg=Black  ctermbg=Gray     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=Gray     cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=DarkBlue      cterm=NONE
 nmap <Leader>1 1gt
 nmap <Leader>2 2gt
