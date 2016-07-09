@@ -106,6 +106,9 @@ Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'"
 Plugin 'ashisha/image.vim'
 Plugin 'mkitt/tabline.vim'
+Plugin 'Konfekt/FastFold'
+Plugin 'mhinz/vim-startify'
+Plugin 'hoaproject/Contributions-Vim-Pp'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -256,7 +259,7 @@ let g:syntastic_check_on_wq = 0
 "------------------------------------------------------------------------------
 
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
+let g:acp_enableAtStartup = 1
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -290,6 +293,13 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
@@ -355,12 +365,22 @@ highlight clear SignColumn
 "------------------------------------------------------------------------------
 " Phpcomplete
 "------------------------------------------------------------------------------
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_enhance_jump_to_definition = 1
 let g:phpcomplete_mappings = {
     \  'jump_to_def': '<C-]>',
     \  'jump_to_def_split': '<C-W><C-]>',
     \  'jump_to_def_vsplit': '<C-W><C-\>',
     \}
 
+
+let g:phpcomplete_add_class_extensions = ['mongo']
+let g:phpcomplete_add_function_extensions = ['mongo']
 
 "------------------------------------------------------------------------------
 " Tabline
@@ -401,4 +421,7 @@ endf
 autocmd bufnewfile *.sh call HeaderBash()
 
 autocmd FileType html set shiftwidth=2|set expandtab
+
+"autoload _vimrc
+autocmd! bufwritepost _vimrc source %
 "=============================================================="
