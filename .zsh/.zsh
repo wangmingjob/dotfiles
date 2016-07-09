@@ -1,1 +1,1 @@
-/home/vagrant/git/dotfiles/.zsh
+/Users/wangming/git/dotfiles/.zsh

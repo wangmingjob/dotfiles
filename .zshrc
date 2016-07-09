@@ -106,10 +106,11 @@ export GO15VENDOREXPERIMENT=1
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin:/opt/nodejs/bin"
 
 # APACHE NGINX PHP MYSQL
+export PSYSH_HOME="$HOME/.composer/vendor/psy/psysh"
 export APACHE_HOME="/usr/local/apache"
 export NGNIX_HOME="/usr/local/nginx"
 export PHP_HOME="/usr/local/php"
 export MYSQL_HOME="/usr/local/mysql"
-export PATH="$PATH:/root/.node/bin:$JAVA_HOME/bin:$APACHE_HOME/bin:$NGNIX_HOME/sbin:$PHP_HOME/bin:$MYSQL_HOME/bin"
+export PATH="$PATH:/root/.node/bin:$JAVA_HOME/bin:$APACHE_HOME/bin:$NGNIX_HOME/sbin:$PHP_HOME/bin:$MYSQL_HOME/bin:$PSYSH_HOME/bin"
 
 #==================================================PATH end============================================================================

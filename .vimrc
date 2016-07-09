@@ -85,7 +85,6 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'The-NERD-Commenter'
 Plugin 'The-NERD-tree'
-Plugin 'Syntastic'
 Plugin 'fatih/vim-go'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fugitive.vim'
@@ -97,6 +96,16 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'junegunn/vim-xmark'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'stanangeloff/php.vim'
+Plugin 'taglist.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'rking/ag.vim'
+Plugin 'othree/html5.vim'
+Plugin 'JulesWang/css.vim'
+Plugin 'cakebaker/scss-syntax.vim'"
+Plugin 'ashisha/image.vim'
+Plugin 'mkitt/tabline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -158,6 +167,7 @@ map <leader>t :TagbarToggle<CR>
 
 "==========NERDTree========"
 nmap <leader>e :NERDTreeToggle<CR> 
+let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
@@ -340,6 +350,33 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 highlight clear SignColumn
+
+
+"------------------------------------------------------------------------------
+" Phpcomplete
+"------------------------------------------------------------------------------
+let g:phpcomplete_mappings = {
+    \  'jump_to_def': '<C-]>',
+    \  'jump_to_def_split': '<C-W><C-]>',
+    \  'jump_to_def_vsplit': '<C-W><C-\>',
+    \}
+
+
+"------------------------------------------------------------------------------
+" Tabline
+"------------------------------------------------------------------------------
+hi TabLine      ctermfg=Black  ctermbg=DarkGreen     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=DarkGreen     cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkBlue      cterm=NONE
+nmap <Leader>1 1gt
+nmap <Leader>2 2gt
+nmap <Leader>3 3gt
+nmap <Leader>4 4gt
+nmap <Leader>5 5gt
+nmap <Leader>6 6gt
+nmap <Leader>7 7gt
+nmap <Leader>8 8gt
+nmap <Leader>9 9gt
 
 " Auto add head info
 " .py file auto add header
