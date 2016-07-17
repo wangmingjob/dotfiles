@@ -1,20 +1,12 @@
-"==========================================================================="
-" ProjectLink: https://github.com/wangmingjob/dotfiles
-" AwesomeLink: https://github.com/yangyangwithgnu/use_vim_as_ide
-" PluginList: http://www.vimawesome.com
-" Author: wangmingjob
-" Email: wangmingjob@icloud.com
-" Version: 0.0.1
-" WebSite: http://www.bmbstack.com
-" LastMofify: 2016-07-17
-" Desc: a simple vim config for server
+"https://github.com/yangyangwithgnu/use_vim_as_ide
+
 "==========================================================================="
 "                                     General                               "
 "==========================================================================="
 
 "======基础配置======"
-syntax on   " 用指定语法高亮配色方案替换默认方案
 syntax enable " 开启语法高亮功能
+syntax on   " 用指定语法高亮配色方案替换默认方案
 filetype on   " 开启文件类型侦测
 filetype plugin on   " 不同文件加载对应的插件
 set nocompatible " 关闭兼容∏模式
@@ -22,15 +14,15 @@ set nu   " 显示行号
 set ruler " 显示光标当前位置
 set incsearch  " 开启实时搜索功能
 set ignorecase  " 搜索时大小写不敏感
-set smartcase "智能大小写
+set smartcase
 set wildmenu  " 命令行模式智能补全
 set wildmode=list:longest,full
 set completeopt=longest,menuone
 set nobackup " 覆盖文件时不备份
 set noswapfile
 set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
-if has('mouse') "鼠标支持
-    set mouse=a
+if has('mouse')
+  set mouse=a
 endif
 
 "======代码缩进======"
@@ -50,27 +42,16 @@ set showmode " 显示模式
 set cursorline " 高亮当前行
 set fileencodings=utf-8,gb18030,cp936,big5 " 显示文件编码格式
 set t_Co=256 " 使用256配色
-set backspace=2 
+set pastetoggle=<F10> "" Bind `F10` to `:set paste`
+set backspace=2 " same as ":set backspace=indent,eol,start" in vim7.4
 set nowrap  "禁止折行
 
-
-"=============================================================================="
-"                                        Keymap                                "
-"=============================================================================="
-let mapleader=','
-let g:mapleader=','
+let mapleader=","   " 定义快捷键的前缀，即<Leader>
+let g:mapleader = ","
 inoremap jj <esc>
-" ^行首, $行尾部
-map 0 ^ 
-" 依次遍历window
-nnoremap nw <C-W><C-W>
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 "=============================================================================="
-"                                   PluginList                                 "
+"                                         Plugin                               "
 "=============================================================================="
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -78,144 +59,120 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim' "插件管理器
-Plugin 'tomasr/molokai' "molokai主题
-Plugin 'scrooloose/nerdtree' "树形目录
-Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree中显示git状态
-Plugin 'tpope/vim-fugitive' "Git wrapper
-Plugin 'scrooloose/syntastic' "语法检查
-Plugin 'kien/rainbow_parentheses.vim' "多彩括号匹配,例如对于lisp语言
-Plugin 'tpope/vim-surround' "is all about surroundings, parentheses, brackets, quotes, XML tags, and more
-Plugin 'kien/ctrlp.vim'   "file, buffer, MRU, tag, etc finder
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdcommenter' "注释助手
-Plugin 'xolox/vim-misc' "easytags依赖项
-Plugin 'xolox/vim-easytags' "tags生成器,避免使用ctags
-Plugin 'majutsushi/tagbar' "显示tagbar目录
-Plugin 'pangloss/vim-javascript' "js缩进语法支持
-Plugin 'ervandew/supertab' "插入模式下Tab补全
-Plugin 'tpope/vim-repeat' "repeating
-Plugin 'godlygeek/tabular' "文本Tab补齐
-Plugin 'easymotion/vim-easymotion' "跳转提示
-Plugin 'mattn/emmet-vim' "emmet.io; html:5 ==> <c-y>,
-Plugin 'SirVer/ultisnips' "Track the engine
-Plugin 'honza/vim-snippets' "代码片段
-Plugin 'Shougo/unite.vim' "find files, buffers, MRU
-Plugin 'mkitt/tabline.vim' "Tab line
-Plugin 'klen/python-mode' "Python mode
-Plugin 'nvie/vim-flake8' "Python代码规范利器
-Plugin 'davidhalter/jedi-vim' "Python代码补全
-Plugin 'othree/html5.vim' "html5代码补全
-Plugin 'plasticboy/vim-markdown' "markdown syntax
-Plugin 'groenewege/vim-less' "less syntax
-Plugin 'elzr/vim-json' "json syntax
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'godlygeek/tabular'
+Plugin 'scrooloose/nerdtree'
+Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
+Plugin 'Tagbar'
+Plugin 'Auto-Pairs'
+Plugin 'tomasr/molokai'
+Plugin 'mileszs/ack.vim'
+Plugin 'ctrlp.vim'
+Plugin 'EasyMotion'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'CSApprox'
+Plugin 'gitv'
 Plugin 'neocomplcache-snippets_complete'
+Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'fatih/vim-go' "golang开发套件
+Plugin 'The-NERD-Commenter'
+Plugin 'The-NERD-tree'
+Plugin 'Syntastic'
+Plugin 'fatih/vim-go'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-bufferline' "buffer line
+Plugin 'fugitive.vim'
+Plugin 'editorconfig-vim'
+Plugin 'junegunn/fzf'
+Plugin 'bling/vim-bufferline'
+Plugin 'cespare/vim-toml'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 Plugin 'junegunn/vim-xmark'
-Plugin 'shawncplus/phpcomplete.vim'
-Plugin 'stanangeloff/php.vim'
-Plugin 'taglist.vim'
-Plugin 'rking/ag.vim' "超级ag搜索
-Plugin 'JulesWang/css.vim'
-Plugin 'cakebaker/scss-syntax.vim'"
-Plugin 'ashisha/image.vim'
-Plugin 'Konfekt/FastFold'
-Plugin 'mhinz/vim-startify'
-Plugin 'hoaproject/Contributions-Vim-Pp'
-Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"=======主题配置======"
 
+"==========主题配置==========="
+set t_Co=256
 set background=dark
 colorscheme molokai
-let g:molokai_original=1
+let g:molokai_original = 1
 
 "=============================================================================="
-"                            Plugin configuration                              "
+"                                        Keymap                                "
 "=============================================================================="
+nmap lb 0
+nmap le $
 
-"------------------------------------------------------------------------------
-" NERDTree
-"------------------------------------------------------------------------------
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc()==0 && !exists("s:std_in") | NERDTree | endif
-nmap <leader>e :NERDTreeToggle<CR> 
-let g:NERDTreeDirArrows=1
-let g:NERDTreeDirArrowExpandable='▸'
-let g:NERDTreeDirArrowCollapsible='▾'
+vnoremap <Leader>y   "copy
+nmap <Leader>p       "past
 
-"------------------------------------------------------------------------------
-" NERDTree-git-plugin
-"------------------------------------------------------------------------------
-let g:NERDTreeIndicatorMapCustom = {
-            \ "Modified"  : "✹",
-            \ "Staged"    : "✚",
-            \ "Untracked" : "✭",
-            \ "Renamed"   : "➜",
-            \ "Unmerged"  : "═",
-            \ "Deleted"   : "✖",
-            \ "Dirty"     : "✗",
-            \ "Clean"     : "✔︎",
-            \ "Unknown"   : "?"
-            \ }
+nmap <Leader>q :q<CR>  " 定义快捷键关闭当前分割窗口
+nmap <Leader>Q :qa!<CR>  " 不做任何保存，直接退出 vim
+nmap <Leader>WQ :wa<CR>:q<CR> " 定义快捷键保存所有窗口内容并退出 vim
+
+nnoremap nw <C-W><C-W>  " 依次遍历子窗口
 
 
-"------------------------------------------------------------------------------
-" Syntastic
-"------------------------------------------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_exec = 'tidy5'
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>tj :tabnext
+map <leader>tk :tabprevious
 
-"------------------------------------------------------------------------------
-" Tagbar
-"------------------------------------------------------------------------------
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z,
+
+nmap <leader>l :set list!<CR> " Not display above list
+nmap <Leader>pa %  " 定义快捷键在结对符之间跳转，助记pair
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR> " Execute file being edited with <Shift> + e:
+
+"=============================================================================="
+"                                        Plugin configuration                  "
+"=============================================================================="
+"=========Tagbar==========="
 map <leader>t :TagbarToggle<CR> 
+
+"==========NERDTree========"
+nmap <leader>e :NERDTreeToggle<CR> 
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
 "===========Better Rainbow Parentheses======="
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
-"------------------------------------------------------------------------------
-" ultisnips
-"------------------------------------------------------------------------------
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-"------------------------------------------------------------------------------
-" powerline
-"------------------------------------------------------------------------------
+"==============vim-powerline==========="
 let g:Powerline_symbols = 'unicode' " compatible/unicode/fancy
 set laststatus=2   " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors"
-au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2"
+au BufRead,BufNewFile *.md set filetype=markdown  " .md default is modula2
 
 "==========davidhalter/jedi-vim======"
 autocmd FileType python setlocal completeopt-=preview    " disable docstring
@@ -231,36 +188,36 @@ highlight link Flake8_Complexity WarningMsg
 highlight link Flake8_Naming     WarningMsg
 highlight link Flake8_PyFlake    WarningMsg
 
-"------------------------------------------------------------------------------
-" rainbow_parentheses
-"------------------------------------------------------------------------------
+"============rainbow_parentheses.vim============"
 let g:rbpt_colorpairs = [
-            \ ['brown',       'RoyalBlue3'],
-            \ ['Darkblue',    'SeaGreen3'],
-            \ ['darkgray',    'DarkOrchid3'],
-            \ ['darkgreen',   'firebrick3'],
-            \ ['darkcyan',    'RoyalBlue3'],
-            \ ['darkred',     'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['brown',       'firebrick3'],
-            \ ['gray',        'RoyalBlue3'],
-            \ ['darkred',     'DarkOrchid3'],
-            \ ['black',       'SeaGreen3'],
-            \ ['darkmagenta', 'DarkOrchid3'],
-            \ ['Darkblue',    'firebrick3'],
-            \ ['darkgreen',   'RoyalBlue3'],
-            \ ['darkcyan',    'SeaGreen3'],
-            \ ['red',         'firebrick3'],
-            \ ]
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['red',         'firebrick3'],
+    \ ]
 
 
 "------------------------------------------------------------------------------
 " BufExplorer
 "------------------------------------------------------------------------------
+
 " Shortcuts, type <leader>l to quickly navigate to necessary buffer
 map <leader>l :BufExplorer<cr>
 imap <leader>l <esc>:BufExplorer<cr>
 vmap <leader>l <esc>:BufExplorer<cr>
+
 
 "------------------------------------------------------------------------------
 " Fugitive
@@ -289,7 +246,7 @@ let g:syntastic_check_on_wq = 0
 "------------------------------------------------------------------------------
 
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 1
+let g:acp_enableAtStartup = 0
 
 " Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
@@ -312,7 +269,7 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -323,19 +280,20 @@ inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
+  let g:neocomplete#sources#omni#input_patterns = {}
 endif
 let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
@@ -383,49 +341,12 @@ let g:go_highlight_structs = 1
 
 highlight clear SignColumn
 
-
-"------------------------------------------------------------------------------
-" Phpcomplete
-"------------------------------------------------------------------------------
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_complete_for_unknown_classes = 1
-let g:phpcomplete_search_tags_for_variables = 1
-let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_enhance_jump_to_definition = 1
-let g:phpcomplete_mappings = {
-            \  'jump_to_def': '<C-]>',
-            \  'jump_to_def_split': '<C-W><C-]>',
-            \  'jump_to_def_vsplit': '<C-W><C-\>',
-            \}
-
-
-let g:phpcomplete_add_class_extensions = ['mongo']
-let g:phpcomplete_add_function_extensions = ['mongo']
-
-"------------------------------------------------------------------------------
-" Tabline
-"------------------------------------------------------------------------------
-hi TabLine      term=reverse cterm=NONE  ctermfg=144  ctermbg=236  guibg=#232526     
-hi TabLineFill  term=reverse cterm=NONE  ctermfg=144  ctermbg=236  guibg=#232526    
-hi TabLineSel   term=reverse cterm=bold  ctermfg=238  ctermbg=208  gui=bold guifg=#455354 guibg=#DC6F23
-nmap <Leader>1 1gt
-nmap <Leader>2 2gt
-nmap <Leader>3 3gt
-nmap <Leader>4 4gt
-nmap <Leader>5 5gt
-nmap <Leader>6 6gt
-nmap <Leader>7 7gt
-nmap <Leader>8 8gt
-nmap <Leader>9 9gt
-
 " Auto add head info
 " .py file auto add header
 function HeaderPython()
     call setline(1, "#!/usr/bin/env python")
     call append(1,  "# -*- coding: utf-8 -*-")
-    call append(2,  "# wangmingjob @ " . strftime('%Y-%m-%d', localtime()))
+    call append(2,  "# Tanky Woo @ " . strftime('%Y-%m-%d', localtime()))
     normal G
     normal o
     normal o
@@ -435,24 +356,12 @@ autocmd bufnewfile *.py call HeaderPython()
 " .sh file auto add header
 function HeaderBash()
     call setline(1, "#!/bin/bash")
-    call append(1,  "# wangmingjob @ " . strftime('%Y-%m-%d %T', localtime()))
+    call append(1,  "# Tanky Woo @ " . strftime('%Y-%m-%d %T', localtime()))
     normal G
     normal o
     normal o
 endf
 autocmd bufnewfile *.sh call HeaderBash()
 
-" .php file auto add header
-function HeaderPHP() 
-    call setline(1, "<?php")
-    normal G
-    normal o
-endf
-autocmd bufnewfile *.php call HeaderPHP()
-
-
 autocmd FileType html set shiftwidth=2|set expandtab
-
-"autoload _vimrc(自动加载vimrc配置)
-autocmd! bufwritepost _vimrc source %
 "=============================================================="

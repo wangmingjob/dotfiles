@@ -29,3 +29,5 @@ alias tst='cd ~/.tasks/; git status; cd -'
 
 alias json="python -mjson.tool"
 alias ccat="pygmentize -g"
+alias vmup="cd $HOME/git/homestead && vagrant up && cd -"
+alias vmssh="cd $HOME/git/homestead && vagrant ssh"
