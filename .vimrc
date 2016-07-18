@@ -48,10 +48,12 @@ set autoindent " 自动缩进
 set showmatch " 设置匹配模式，类似当输入一个左括号时会匹配相应的右括号   
 set showmode " 显示模式
 set cursorline " 高亮当前行
+set cursorcolumn
 set fileencodings=utf-8,gb18030,cp936,big5 " 显示文件编码格式
 set t_Co=256 " 使用256配色
 set backspace=2 
 set nowrap  "禁止折行
+set hls
 
 
 "=============================================================================="
@@ -80,6 +82,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' "插件管理器
 Plugin 'tomasr/molokai' "molokai主题
+Plugin 'haya14busa/incsearch.vim' "iMproved searching for vim
 Plugin 'scrooloose/nerdtree' "树形目录
 Plugin 'Xuyuanp/nerdtree-git-plugin' "nerdtree中显示git状态
 Plugin 'tpope/vim-fugitive' "Git wrapper
@@ -97,6 +100,7 @@ Plugin 'ervandew/supertab' "插入模式下Tab补全
 Plugin 'tpope/vim-repeat' "repeating
 Plugin 'godlygeek/tabular' "文本Tab补齐
 Plugin 'easymotion/vim-easymotion' "跳转提示
+Plugin 'haya14busa/incsearch-easymotion.vim' "incsearch-easymotion
 Plugin 'mattn/emmet-vim' "emmet.io; html:5 ==> <c-y>,
 Plugin 'SirVer/ultisnips' "Track the engine
 Plugin 'honza/vim-snippets' "代码片段
@@ -170,6 +174,56 @@ let g:NERDTreeIndicatorMapCustom = {
             \ "Unknown"   : "?"
             \ }
 
+
+"------------------------------------------------------------------------------
+" incsearch
+"------------------------------------------------------------------------------
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+"------------------------------------------------------------------------------
+" easymotion
+"------------------------------------------------------------------------------
+" You can use other keymappings like <C-l> instead of <CR> if you want to
+" " use these mappings as default search and somtimes want to move cursor with
+" " EasyMotion.
+function! s:incsearch_config(...) abort
+    return incsearch#util#deepextend(deepcopy({
+                \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+                \   'keymap': {
+                \     "\<CR>": '<Over>(easymotion)'
+                \ },
+                \   'is_expr': 0
+                \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0 " keep cursor column when JK motion"
+
+let g:EasyMotion_smartcase = 1
 
 "------------------------------------------------------------------------------
 " Syntastic
@@ -363,7 +417,7 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 " Run/build/test/coverage
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
+"au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
 "------------------------------------------------------------------------------
