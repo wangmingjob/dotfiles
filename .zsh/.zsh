@@ -1,1 +1,1 @@
-/Users/wangming/git/dotfiles/.zsh
+/Users/nixon/Private/dotfiles/.zsh

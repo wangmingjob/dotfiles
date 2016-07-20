@@ -31,3 +31,11 @@ alias json="python -mjson.tool"
 alias ccat="pygmentize -g"
 alias vmup="cd $HOME/git/homestead && vagrant up && cd -"
 alias vmssh="cd $HOME/git/homestead && vagrant ssh"
+
+# override emacs
+alias emacs='emacs -nw'
+# wakeup emacs
+alias fe='fg %emacs'
+
+# wakeup vim
+alias fv='fg %vim'
