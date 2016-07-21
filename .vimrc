@@ -9,6 +9,49 @@
 " LastMofify: 2016-07-17
 " Desc: a simple vim config for server
 
+"==========================================================================="
+"                                     General                               "
+"==========================================================================="
+
+"======基础配置======"
+syntax on   " 用指定语法高亮配色方案替换默认方案
+syntax enable " 开启语法高亮功能
+filetype on   " 开启文件类型侦测
+filetype plugin on   " 不同文件加载对应的插件
+set nocompatible " 关闭兼容∏模式
+set nu   " 显示行号
+set ruler " 显示光标当前位置
+set incsearch  " 开启实时搜索功能
+set ignorecase  " 搜索时大小写不敏感
+set smartcase "智能大小写
+set wildmenu  " 命令行模式智能补全
+set wildmode=list:longest,full
+set completeopt=longest,menuone
+set nobackup " 覆盖文件时不备份
+set noswapfile
+set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
+if has('mouse') "鼠标支持
+    set mouse=a
+endif
+
+
+
+"=======代码折叠======"
+set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
+set nofoldenable " 启动 vim 时关闭折叠代码
+set smarttab " 只能添加4个空格和删除4个空格
+set autoindent " 自动缩进
+set showmatch " 设置匹配模式，类似当输入一个左括号时会匹配相应的右括号   
+set showmode " 显示模式
+set cursorline " 高亮当前行
+set cursorcolumn
+set fileencodings=utf-8,gb18030,cp936,big5 " 显示文件编码格式
+set t_Co=256 " 使用256配色
+set backspace=2 
+set nowrap  "禁止折行
+set hls
+
+
 "=============================================================================="
 "                                        Keymap                                "
 "=============================================================================="
@@ -50,6 +93,7 @@ Plugin 'xolox/vim-misc' "easytags依赖项
 Plugin 'xolox/vim-easytags' "tags生成器,避免使用ctags
 Plugin 'majutsushi/tagbar' "显示tagbar目录
 Plugin 'pangloss/vim-javascript' "js缩进语法支持
+Plugin 'mxw/vim-jsx' " jsx 语法高亮
 Plugin 'ervandew/supertab' "插入模式下Tab补全
 Plugin 'tpope/vim-repeat' "repeating
 Plugin 'godlygeek/tabular' "文本Tab补齐
@@ -434,6 +478,11 @@ nmap <Leader>9 9gt
 "------------------------------------------------------------------------------
 let g:cssColorVimDoNotMessMyUpdatetime = 1
 
+"------------------------------------------------------------------------------
+"vim-jsx 
+"------------------------------------------------------------------------------
+let g:jsx_ext_required = 0
+
 " Auto add head info
 " .py file auto add header
 function HeaderPython()
@@ -471,50 +520,9 @@ autocmd FileType html set shiftwidth=2|set expandtab
 autocmd! bufwritepost _vimrc source %
 "=============================================================="
 
-
-"==========================================================================="
-"                                     General                               "
-"==========================================================================="
-
-"======基础配置======"
-syntax on   " 用指定语法高亮配色方案替换默认方案
-syntax enable " 开启语法高亮功能
-filetype on   " 开启文件类型侦测
-filetype plugin on   " 不同文件加载对应的插件
-set nocompatible " 关闭兼容∏模式
-set nu   " 显示行号
-set ruler " 显示光标当前位置
-set incsearch  " 开启实时搜索功能
-set ignorecase  " 搜索时大小写不敏感
-set smartcase "智能大小写
-set wildmenu  " 命令行模式智能补全
-set wildmode=list:longest,full
-set completeopt=longest,menuone
-set nobackup " 覆盖文件时不备份
-set noswapfile
-set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
-if has('mouse') "鼠标支持
-    set mouse=a
-endif
-
 "======代码缩进======"
 filetype indent on " 自适应不同语言的智能缩进
 set expandtab " 将制表符扩展为空格
 set tabstop=4 " 设置编辑时制表符占用空格数
 set shiftwidth=4 " 设置格式化时制表符占用空格数
 set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
-
-"=======代码折叠======"
-set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
-set nofoldenable " 启动 vim 时关闭折叠代码
-set smarttab " 只能添加4个空格和删除4个空格
-set autoindent " 自动缩进
-set showmatch " 设置匹配模式，类似当输入一个左括号时会匹配相应的右括号   
-set showmode " 显示模式
-set cursorline " 高亮当前行
-set cursorcolumn
-set fileencodings=utf-8,gb18030,cp936,big5 " 显示文件编码格式
-set t_Co=256 " 使用256配色
-set backspace=2 
-set nowrap  "禁止折行
-set hls
