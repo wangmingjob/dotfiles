@@ -63,7 +63,7 @@ let mapleader=','
 let g:mapleader=','
 inoremap jj <esc>
 " ^行首, $行尾部
-map 0 ^ 
+"map 0 ^ 
 " 依次遍历window
 nnoremap nw <C-W><C-W>
 map <C-j> <C-W>j

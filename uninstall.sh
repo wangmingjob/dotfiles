@@ -14,3 +14,7 @@ rm -f ${HOME}/tmux.sh
 echo "Delete symlink ${HOME}/tmux.sh"
 rm -f ${HOME}/.zsh
 echo "Delete symlink ${HOME}/.zsh"
+rm -rf ${HOME}/.tmux
+echo "Delete dirs ${HOME}/.tmux"
+rm -rf ${HOME}/.vim
+echo "Delete dirs ${HOME}/.vim"

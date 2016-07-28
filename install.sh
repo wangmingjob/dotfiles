@@ -11,6 +11,7 @@ HOME=${HOME}
 PWD=`pwd`
 OH_MY_ZSH=${HOME}"/.oh-my-zsh"
 VUNDLE=${HOME}"/.vim/bundle/Vundle.vim"
+TPM=${HOME}"/.tmux/plugins/tpm"
 
 # Pre check
 check_software_exist(){
@@ -64,6 +65,24 @@ install_vundle(){
 	fi
 }
 
+# tmux install 'tpm' and plugins
+ install_tpm() {
+     if [ -d "${TPM}"  ]; then
+         cd "${TPM}"
+         echo "Change directory to `pwd`"
+         echo "${TPM} existsa. Git pull to update..."
+         git pull 
+         cd - > /dev/null 2>&1
+         echo "Change directory back to `pwd`"
+     else
+         echo "${TPM} not exists. Git clone to create ..."
+         git clone https://github.com/tmux-plugins/tpm ${TPM}
+         tmux source ${HOME}/.tmux.conf
+     fi
+ }
+
+
+
 config_zsh(){
 	echo "Create symlink ${HOME}/.zsh"
 	ln -sf ${PWD}/.zsh ${HOME}/.zsh
@@ -81,6 +100,7 @@ main(){
 	check_software_exist
 	install_oh_my_zsh
 	install_vundle
+    install_tpm
 	create_symlinks
 	config_zsh
 	config_tmux
