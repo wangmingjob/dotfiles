@@ -1,13 +1,14 @@
 "==========================================================================="
-" ProjectLink: https://github.com/wangmingjob/dotfiles
+" ProjectLink: https://github.com/WellerQu/dotfiles
 " AwesomeLink: https://github.com/yangyangwithgnu/use_vim_as_ide
 " PluginList: http://www.vimawesome.com
-" Author: wangmingjob
-" Email: wangmingjob@icloud.com
+" Author: nixon
+" Email: xiaoyao.ning@gmail.com
 " Version: 0.0.1
 " WebSite: http://www.bmbstack.com
 " LastMofify: 2016-07-17
 " Desc: a simple vim config for server
+
 "==========================================================================="
 "                                     General                               "
 "==========================================================================="
@@ -33,12 +34,7 @@ if has('mouse') "鼠标支持
     set mouse=a
 endif
 
-"======代码缩进======"
-filetype indent on " 自适应不同语言的智能缩进
-set expandtab " 将制表符扩展为空格
-set tabstop=4 " 设置编辑时制表符占用空格数
-set shiftwidth=4 " 设置格式化时制表符占用空格数
-set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
+
 
 "=======代码折叠======"
 set foldmethod=syntax  "set foldmethod=indent 基于缩进或语法进行代码折叠
@@ -62,6 +58,7 @@ set hls
 let mapleader=','
 let g:mapleader=','
 inoremap jj <esc>
+inoremap kk <esc>
 " ^行首, $行尾部
 map 0 ^ 
 " 依次遍历window
@@ -96,6 +93,7 @@ Plugin 'xolox/vim-misc' "easytags依赖项
 Plugin 'xolox/vim-easytags' "tags生成器,避免使用ctags
 Plugin 'majutsushi/tagbar' "显示tagbar目录
 Plugin 'pangloss/vim-javascript' "js缩进语法支持
+Plugin 'mxw/vim-jsx' " jsx 语法高亮
 Plugin 'ervandew/supertab' "插入模式下Tab补全
 Plugin 'tpope/vim-repeat' "repeating
 Plugin 'godlygeek/tabular' "文本Tab补齐
@@ -106,9 +104,9 @@ Plugin 'SirVer/ultisnips' "Track the engine
 Plugin 'honza/vim-snippets' "代码片段
 Plugin 'Shougo/unite.vim' "find files, buffers, MRU
 Plugin 'mkitt/tabline.vim' "Tab line
-Plugin 'klen/python-mode' "Python mode
-Plugin 'nvie/vim-flake8' "Python代码规范利器
-Plugin 'davidhalter/jedi-vim' "Python代码补全
+" Plugin 'klen/python-mode' "Python mode
+" Plugin 'nvie/vim-flake8' "Python代码规范利器
+" Plugin 'davidhalter/jedi-vim' "Python代码补全
 Plugin 'othree/html5.vim' "html5代码补全
 Plugin 'plasticboy/vim-markdown' "markdown syntax
 Plugin 'groenewege/vim-less' "less syntax
@@ -119,21 +117,22 @@ Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'fatih/vim-go' "golang开发套件
+" Plugin 'fatih/vim-go' "golang开发套件
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-bufferline' "buffer line
-Plugin 'junegunn/vim-xmark'
-Plugin 'shawncplus/phpcomplete.vim'
+" Plugin 'junegunn/vim-xmark'
+" Plugin 'shawncplus/phpcomplete.vim'
 Plugin 'stanangeloff/php.vim'
 Plugin 'taglist.vim'
 Plugin 'rking/ag.vim' "超级ag搜索
 Plugin 'JulesWang/css.vim'
-Plugin 'cakebaker/scss-syntax.vim'"
+" Plugin 'cakebaker/scss-syntax.vim'"
 Plugin 'ashisha/image.vim'
 Plugin 'Konfekt/FastFold'
 Plugin 'mhinz/vim-startify'
 Plugin 'hoaproject/Contributions-Vim-Pp'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'skammer/vim-css-color'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -474,12 +473,22 @@ nmap <Leader>7 7gt
 nmap <Leader>8 8gt
 nmap <Leader>9 9gt
 
+"------------------------------------------------------------------------------
+" vim-css-color
+"------------------------------------------------------------------------------
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+"------------------------------------------------------------------------------
+"vim-jsx 
+"------------------------------------------------------------------------------
+let g:jsx_ext_required = 0
+
 " Auto add head info
 " .py file auto add header
 function HeaderPython()
     call setline(1, "#!/usr/bin/env python")
     call append(1,  "# -*- coding: utf-8 -*-")
-    call append(2,  "# wangmingjob @ " . strftime('%Y-%m-%d', localtime()))
+    call append(2,  "# nixon @ " . strftime('%Y-%m-%d', localtime()))
     normal G
     normal o
     normal o
@@ -489,7 +498,7 @@ autocmd bufnewfile *.py call HeaderPython()
 " .sh file auto add header
 function HeaderBash()
     call setline(1, "#!/bin/bash")
-    call append(1,  "# wangmingjob @ " . strftime('%Y-%m-%d %T', localtime()))
+    call append(1,  "# nixon @ " . strftime('%Y-%m-%d %T', localtime()))
     normal G
     normal o
     normal o
@@ -510,3 +519,10 @@ autocmd FileType html set shiftwidth=2|set expandtab
 "autoload _vimrc(自动加载vimrc配置)
 autocmd! bufwritepost _vimrc source %
 "=============================================================="
+
+"======代码缩进======"
+filetype indent on " 自适应不同语言的智能缩进
+set expandtab " 将制表符扩展为空格
+set tabstop=4 " 设置编辑时制表符占用空格数
+set shiftwidth=4 " 设置格式化时制表符占用空格数
+set softtabstop=4 " 让 vim 把连续数量的空格视为一个制表符
