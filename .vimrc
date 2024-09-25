@@ -162,7 +162,7 @@ let g:NERDTreeDirArrowCollapsible='▾'
 "------------------------------------------------------------------------------
 " NERDTree-git-plugin
 "------------------------------------------------------------------------------
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom= {
             \ "Modified"  : "✹",
             \ "Staged"    : "✚",
             \ "Untracked" : "✭",
